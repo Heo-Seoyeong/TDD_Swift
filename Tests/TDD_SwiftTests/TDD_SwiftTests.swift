@@ -11,4 +11,8 @@ class TDD_SwiftTests: XCTestCase {
         XCTAssertEqual(15, product.amount)
     }
 
+    func testEquality() {
+        XCTAssertTrue(Dollor(amount: 5) == Dollor(amount: 5))
+        XCTAssertFalse(Dollor(amount: 5) == Dollor(amount: 6))
+    }
 }
