@@ -1,5 +1,5 @@
 class Dollor {
-    var amount = 0
+    fileprivate var amount = 0
     
     init(amount: Int) {
         self.amount = amount
