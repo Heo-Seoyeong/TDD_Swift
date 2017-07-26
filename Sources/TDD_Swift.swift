@@ -6,28 +6,35 @@ class Money {
         self.amount = amount
     }
     
+    static func dollar(amount: Int) -> Money {
+        return Money(amount: amount)
+    }
+    
+    func times(multiplier: Int) -> Money {
+        return Money(amount: 5 * multiplier)
+    }
+    
 }
 
 extension Money: Equatable {
     
     public static func == (lhs: Money, rhs: Money) -> Bool {
         return (lhs.amount == rhs.amount) && (type(of: lhs) == type(of: rhs))
-        //  && (type(of: lhs) == type(of: rhs)) 이번 장에서 추가 되었어야 할 부분...
     }
     
 }
 
-class Dollor: Money {
+class Dollar: Money {
     
-    func times(multiplier: Int) -> Dollor {
-        return Dollor(amount: 5 * multiplier)
+    override func times(multiplier: Int) -> Money {
+        return Dollar(amount: 5 * multiplier)
     }
     
 }
 
 class Franc: Money {
     
-    func times(multiplier: Int) -> Franc {
+    override func times(multiplier: Int) -> Money {
         return Franc(amount: 5 * multiplier)
     }
     
