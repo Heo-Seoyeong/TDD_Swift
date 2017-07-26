@@ -12,6 +12,7 @@ extension Money: Equatable {
     
     public static func == (lhs: Money, rhs: Money) -> Bool {
         return (lhs.amount == rhs.amount) && (type(of: lhs) == type(of: rhs))
+        //  && (type(of: lhs) == type(of: rhs)) 이번 장에서 추가 되었어야 할 부분...
     }
     
 }
