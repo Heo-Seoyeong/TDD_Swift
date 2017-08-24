@@ -12,15 +12,19 @@ class TDD_SwiftTests: XCTestCase {
     func testEquality() {
         XCTAssertTrue(Money.dollar(amount: 5) == Money.dollar(amount: 5))
         XCTAssertFalse(Money.dollar(amount: 5) == Money.dollar(amount: 6))
-        XCTAssertTrue(Franc(amount: 5) == Franc(amount: 5))
-        XCTAssertFalse(Franc(amount: 5) == Franc(amount: 6))
-        XCTAssertFalse(Franc(amount: 5) == Money.dollar(amount: 5))
+        XCTAssertTrue(Money.franc(amount: 5) == Money.franc(amount: 5))
+        XCTAssertFalse(Money.franc(amount: 5) == Money.franc(amount: 6))
+        XCTAssertFalse(Money.dollar(amount: 6) == Money.franc(amount: 6))
     }
     
     func testFrancMultiplication() {
-        let five: Franc = Franc(amount: 5)
-        XCTAssertEqual(Franc(amount: 10), five.times(multiplier: 2))
-        XCTAssertEqual(Franc(amount: 15), five.times(multiplier: 3))
+        let five = Money.franc(amount: 5)
+        XCTAssertEqual(Money.franc(amount: 10), five.times(multiplier: 2))
+        XCTAssertEqual(Money.franc(amount: 15), five.times(multiplier: 3))
     }
     
+    func testCurrency() {
+        XCTAssertEqual("USD", Money.dollar(amount: 1).currency)
+        XCTAssertEqual("CHF", Money.franc(amount: 1).currency)
+    }
 }
