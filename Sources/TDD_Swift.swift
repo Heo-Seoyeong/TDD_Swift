@@ -1,17 +1,23 @@
 class Money {
     
     fileprivate var amount = 0
+    let currency: String
     
-    init(amount: Int) {
+    init(amount: Int, currency: String) {
         self.amount = amount
-    }
-    
-    static func dollar(amount: Int) -> Money {
-        return Money(amount: amount)
+        self.currency = currency
     }
     
     func times(multiplier: Int) -> Money {
-        return Money(amount: 5 * multiplier)
+        return Money(amount: amount * multiplier, currency: "")
+    }
+    
+    class func dollar(amount: Int) -> Dollar {
+        return Dollar(amount: amount, currency: "USD")
+    }
+    
+    class func franc(amount: Int) -> Franc {
+        return Franc(amount: amount, currency: "CHF")
     }
     
 }
@@ -27,7 +33,7 @@ extension Money: Equatable {
 class Dollar: Money {
     
     override func times(multiplier: Int) -> Money {
-        return Dollar(amount: 5 * multiplier)
+        return Dollar(amount: amount * multiplier, currency: "USD")
     }
     
 }
@@ -35,7 +41,7 @@ class Dollar: Money {
 class Franc: Money {
     
     override func times(multiplier: Int) -> Money {
-        return Franc(amount: 5 * multiplier)
+        return Franc(amount: amount * multiplier, currency: "CHF")
     }
     
 }
