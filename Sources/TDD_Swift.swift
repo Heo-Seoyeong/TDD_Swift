@@ -1,19 +1,24 @@
-class Money {
+class Money: Expression {
     
-    fileprivate var amount = 0
-    let currency: String
+    internal var amount = 0
+    internal let currency: String
     
     init(amount: Int, currency: String) {
         self.amount = amount
         self.currency = currency
     }
     
-    func times(multiplier: Int) -> Money {
+    func times(multiplier: Int) -> Expression {
         return Money(amount: amount * multiplier, currency: currency)
     }
 
-    static func +(lhs: Money, rhs: Money) -> Expression {
-        return Sum(augend: lhs, addend: rhs)
+    func plus(addend: Expression) -> Expression {
+        return Sum(augend: self, addend: addend as! Money)
+    }
+    
+    func reduce(bank: Bank, to: String) -> Money {
+        let rate = bank.rate(from: currency, to: to)
+        return Money(amount: amount / rate, currency: to)
     }
     
     class func dollar(amount: Int) -> Money {
@@ -29,6 +34,8 @@ class Money {
 protocol Expression {
     
     func reduce(bank: Bank, to: String) -> Money
+    func plus(addend: Expression) -> Expression
+    func times(multiplier: Int) -> Expression
     
 }
 
@@ -59,28 +66,27 @@ class Bank {
 
 struct Sum: Expression {
     
-    let augend: Money
-    let addend: Money
+    let augend: Expression
+    let addend: Expression
     
     func reduce(bank: Bank, to: String) -> Money {
-        return Money(amount: self.augend.amount + self.addend.amount, currency: to)
+        let amount = augend.reduce(bank: bank, to: to).amount + addend.reduce(bank: bank, to: to).amount
+        return Money(amount: amount, currency: to)
     }
     
+    func plus(addend: Expression) -> Expression {
+        return Sum(augend: self, addend: addend)
+    }
+    
+    func times(multiplier: Int) -> Expression {
+        return Sum(augend: addend.times(multiplier: multiplier), addend: addend.times(multiplier: multiplier))
+    }
 }
 
 extension Money: Equatable {
     
     public static func == (lhs: Money, rhs: Money) -> Bool {
         return (lhs.amount == rhs.amount) && (lhs.currency == rhs.currency)
-    }
-    
-}
-
-extension Money: Expression {
-    
-    func reduce(bank: Bank, to: String) -> Money {
-        let rate = bank.rate(from: self.currency, to: to)
-        return Money(amount: self.amount / rate, currency: to)
     }
     
 }
