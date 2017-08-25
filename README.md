@@ -3,6 +3,8 @@
 * 기간 : 2017. 7. 18 ~ 2017. 8. 25
 * 교재의 내용을 Swift를 이용하여 구현
 
+
+
 ## 진행 일정
 ### 1회
 * 날짜 : 2017. 7. 18
@@ -17,6 +19,7 @@
 * 분량 : 14장 ~ 16장
 
 
+
 ## 테스트 흐름
 ### TDD를 위한 프로젝트 생성
 ```bash
@@ -26,7 +29,6 @@ $ swift package init
 $ swift package generate-xcodeproj
 $ oepn SwiftTDD.xcodeproj
 ```
-
 
 ### 1장 다중통화를 지원하는 Money 객체
 
@@ -63,7 +65,7 @@ $ oepn SwiftTDD.xcodeproj
  
 * $5 + 10CHF = $10 (환율이 2:1일 경우)
 * ~~$5 * 2 = $10~~
-* ~~`amount`를 private로 만들기~~
+* ~~amount를 private로 만들기~~
 * ~~Dollor 부작용?~~
 * Money 반올림?
 * ~~equals()~~
@@ -263,7 +265,7 @@ $ oepn SwiftTDD.xcodeproj
 * ~~Money에 대한 통화 변환을 수행하는 Reduce~~
 * ~~Reduce(Bank, String)~~
 * ~~$5 * 2 = $10~~
-* ~~`amount`를 private로 만들기~~
+* ~~amount를 private로 만들기~~
 * ~~Dollor 부작용?~~
 * Money 반올림?
 * ~~equals()~~
@@ -290,7 +292,7 @@ $ oepn SwiftTDD.xcodeproj
 * Sum.plus
 * Expression.times
 * ~~$5 * 2 = $10~~
-* ~~`amount`를 private로 만들기~~
+* ~~amount를 private로 만들기~~
 * ~~Dollor 부작용?~~
 * Money 반올림?
 * ~~equals()~~
@@ -317,7 +319,7 @@ $ oepn SwiftTDD.xcodeproj
 * ~~Sum.plus~~
 * ~~Expression.times~~
 * ~~$5 * 2 = $10~~
-* ~~`amount`를 private로 만들기~~
+* ~~amount를 private로 만들기~~
 * ~~Dollor 부작용?~~
 * Money 반올림?
 * ~~equals()~~
@@ -331,7 +333,3 @@ $ oepn SwiftTDD.xcodeproj
 * ~~Franc과 Dollar 비교하기~~
 * ~~통화?~~
 * ~~testFranceMultiplication 제거~~
-
-
-
-
