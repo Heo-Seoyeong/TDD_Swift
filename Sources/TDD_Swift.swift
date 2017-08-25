@@ -28,16 +28,33 @@ class Money {
 
 protocol Expression {
     
-    func reduce(to: String) -> Money
+    func reduce(bank: Bank, to: String) -> Money
     
 }
 
 class Bank {
     
+    var rates: [Pair: Int] = [:]
+    
     func reduce(source: Expression, to: String) -> Money {
-        return source.reduce(to: to)
+        return source.reduce(bank: self, to: to)
     }
     
+    func addRate(from: String, to: String, rate: Int) {
+        self.rates[Pair(from: from, to: to)] = rate
+    }
+    
+    func rate(from: String, to: String) -> Int {
+        if from == to {
+            return 1
+        }
+        
+        guard let rate = self.rates[Pair(from: from, to: to)] else {
+            fatalError()
+        }
+        
+        return rate
+    }
 }
 
 struct Sum: Expression {
@@ -45,7 +62,7 @@ struct Sum: Expression {
     let augend: Money
     let addend: Money
     
-    func reduce(to: String) -> Money {
+    func reduce(bank: Bank, to: String) -> Money {
         return Money(amount: self.augend.amount + self.addend.amount, currency: to)
     }
     
@@ -60,9 +77,27 @@ extension Money: Equatable {
 }
 
 extension Money: Expression {
+    
+    func reduce(bank: Bank, to: String) -> Money {
+        let rate = bank.rate(from: self.currency, to: to)
+        return Money(amount: self.amount / rate, currency: to)
+    }
+    
+}
 
-       func reduce(to: String) -> Money {
-                return self
+struct Pair {
+    let from: String
+    let to: String
+}
+
+extension Pair: Hashable {
+    
+    public static func ==(lhs: Pair, rhs: Pair) -> Bool{
+        return lhs.from == rhs.from && lhs.to == rhs.to
+    }
+    
+    var hashValue: Int {
+        return 0
     }
     
 }
