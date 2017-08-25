@@ -1,8 +1,7 @@
 # TDD_Swift (Test Driven Development)
 * 교재 : [테스트 주도 개발 Program, Programming, Programmer , 인사이트](http://www.yes24.com/24/goods/12246033?scode=029)
 * 기간 : 2017. 7. 18 ~ 2017. 8. 25
-* 교재의 내용을 Swift를 이용하여 구현
-
+* 교재의 내용을 Swift를 이용하여 구현  
 
 
 ## 진행 일정
@@ -16,8 +15,7 @@
 
 ### 3회
 * 날짜 : 2017. 8. 1
-* 분량 : 14장 ~ 16장
-
+* 분량 : 14장 ~ 16장  
 
 
 ## 테스트 흐름
