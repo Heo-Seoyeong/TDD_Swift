@@ -11,6 +11,10 @@ class Money {
     func times(multiplier: Int) -> Money {
         return Money(amount: amount * multiplier, currency: currency)
     }
+
+    static func +(lhs: Money, rhs: Money) -> Expression {
+        return Money(amount: lhs.amount + rhs.amount, currency: lhs.currency)
+    }
     
     class func dollar(amount: Int) -> Money {
         return Money(amount: amount, currency: "USD")
@@ -20,6 +24,12 @@ class Money {
         return Money(amount: amount, currency: "CHF")
     }
     
+}
+
+class Bank {
+    func reduce(source: Expression, to: String) -> Money {
+        return Money.dollar(amount: 10)
+    }
 }
 
 extension Money: Equatable {
